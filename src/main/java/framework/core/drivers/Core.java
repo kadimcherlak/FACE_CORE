@@ -130,7 +130,8 @@ public abstract class Core<T> {
 	public static synchronized WebDriver startWebDriver() {
 		DriverFactory factory = new DriverFactory(getDriverConfig());
 		driver = factory.createDriver();
-		driver.manage().window().setSize(new org.openqa.selenium.Dimension(1024, 768));
+		//driver.manage().window().setSize(new org.openqa.selenium.Dimension(1024, 768));
+		driver.manage().window().maximize();
 		String window = driver.getWindowHandle();
 		((JavascriptExecutor) driver).executeScript("alert('Test')");
 		driver.switchTo().alert().accept();
