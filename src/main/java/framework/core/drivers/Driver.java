@@ -14,12 +14,18 @@ import java.util.List;
 
 public enum Driver {
 
-	chrome(DesiredCapabilities.chrome(), ChromeDriver.class, RemoteWebDriver.class),
-	firefox(DesiredCapabilities.firefox(), FirefoxDriver.class, RemoteWebDriver.class),
-	ie(DesiredCapabilities.internetExplorer(), SynchronizedIEDriver.class, RemoteWebDriver.class),
-	edge(DesiredCapabilities.edge(), EdgeDriver.class, RemoteWebDriver.class),
-	safari(DesiredCapabilities.safari(), SafariDriver.class, RemoteWebDriver.class),
-	remote(new DesiredCapabilities(), ChromeDriver.class, RemoteWebDriver.class);
+    /*chrome(DesiredCapabilities.chrome(), ChromeDriver.class, RemoteWebDriver.class),
+    firefox(DesiredCapabilities.firefox(), FirefoxDriver.class, RemoteWebDriver.class),
+    ie(DesiredCapabilities.internetExplorer(), SynchronizedIEDriver.class, RemoteWebDriver.class),
+    edge(DesiredCapabilities.edge(), EdgeDriver.class, RemoteWebDriver.class),
+    safari(DesiredCapabilities.safari(), SafariDriver.class, RemoteWebDriver.class),
+    remote(new DesiredCapabilities(), ChromeDriver.class, RemoteWebDriver.class);*/
+    chrome(DesiredCapabilities.chrome(), ChromeDriver.class),
+    firefox(DesiredCapabilities.firefox(), FirefoxDriver.class),
+    ie(DesiredCapabilities.internetExplorer(), SynchronizedIEDriver.class),
+    edge(DesiredCapabilities.edge(), EdgeDriver.class),
+    safari(DesiredCapabilities.safari(), SafariDriver.class),
+    remote(new DesiredCapabilities(), RemoteWebDriver.class);
 
 	private final Class<? extends WebDriver> driverClass;
 	private final Class<? extends WebDriver> hubEnabledDriver;
@@ -55,6 +61,18 @@ public enum Driver {
 		return returnDriver;
 	}
 
+    public static Driver getChromeDriver(String browserName, DesiredCapabilities capabilities) {
+        Driver returnDriver = Driver.chrome;
+        for (Driver driver : Driver.values()) {
+            if (driver.driverName.equals(browserName)) {
+                returnDriver = driver;
+                returnDriver.capabilities = capabilities;
+                break;
+            }
+        }
+        return returnDriver;
+    }
+
 	public static List<String> supportedBrowsers() {
 		List<String> names = new ArrayList<String>();
 		for (Driver driver : Driver.values()) {
@@ -62,6 +80,66 @@ public enum Driver {
 		}
 		return names;
 	}
+
+    public static Driver getFirefoxDriver(String browserName, DesiredCapabilities capabilities) {
+        Driver returnDriver = Driver.firefox;
+        for (Driver driver : Driver.values()) {
+            if (driver.driverName.equals(browserName)) {
+                returnDriver = driver;
+                returnDriver.capabilities = capabilities;
+                break;
+            }
+        }
+        return returnDriver;
+    }
+
+    public static Driver getIeDriver(String browserName, DesiredCapabilities capabilities) {
+        Driver returnDriver = Driver.ie;
+        for (Driver driver : Driver.values()) {
+            if (driver.driverName.equals(browserName)) {
+                returnDriver = driver;
+                returnDriver.capabilities = capabilities;
+                break;
+            }
+        }
+        return returnDriver;
+    }
+
+    public static Driver getEdgeDriver(String browserName, DesiredCapabilities capabilities) {
+        Driver returnDriver = Driver.edge;
+        for (Driver driver : Driver.values()) {
+            if (driver.driverName.equals(browserName)) {
+                returnDriver = driver;
+                returnDriver.capabilities = capabilities;
+                break;
+            }
+        }
+        return returnDriver;
+    }
+
+    public static Driver getSafariDriver(String browserName, DesiredCapabilities capabilities) {
+        Driver returnDriver = Driver.safari;
+        for (Driver driver : Driver.values()) {
+            if (driver.driverName.equals(browserName)) {
+                returnDriver = driver;
+                returnDriver.capabilities = capabilities;
+                break;
+            }
+        }
+        return returnDriver;
+    }
+
+    public static Driver getRemoteDriver(String browserName, DesiredCapabilities capabilities) {
+        Driver returnDriver = Driver.remote;
+        for (Driver driver : Driver.values()) {
+            if (driver.driverName.equals(browserName)) {
+                returnDriver = driver;
+                returnDriver.capabilities = capabilities;
+                break;
+            }
+        }
+        return returnDriver;
+    }
 
 	public Class<? extends WebDriver> getDriverClass() {
 		return driverClass;
