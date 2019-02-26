@@ -4,12 +4,12 @@
         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.ocas.core</groupId>
-    <artifactId>ocas-core</artifactId>
+    <groupId>com.cafe.core</groupId>
+    <artifactId>cafe-core</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>ocas-core</name>
+    <name>cafe-core</name>
     <description>Java based BDD and TDD test automation framework.</description>
     <url>https://code.cognizant.com/465345/oracle_automation_fusion_core.git</url>
 
@@ -31,17 +31,6 @@
         <workingdir>${project.basedir}</workingdir>
     </properties>
 
-    <!-- Distribution Management -->
-    <!--<distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-    </distributionManagement>-->
     <build>
         <pluginManagement>
             <plugins>
@@ -221,6 +210,11 @@
             <groupId>net.java.dev.jna</groupId>
             <artifactId>jna-platform</artifactId>
             <version>4.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>3.17</version>
         </dependency>
     </dependencies>
 </project>

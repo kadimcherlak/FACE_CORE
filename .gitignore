@@ -1,6 +1,9 @@
 /.idea/
-/documentation/
 /logs/
 /target/
 /test-output/
-
+/.setting/
+/.classpath
+/.project
+/debug.log
+/bin/
