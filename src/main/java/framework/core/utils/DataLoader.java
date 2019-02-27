@@ -6,6 +6,7 @@ import framework.core.models.DataStore;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -17,9 +18,9 @@ import java.io.FileInputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.*;
 
 public class DataLoader {
 
@@ -43,6 +44,7 @@ public class DataLoader {
 
 		Map<String, Map<String, String>> sheetToMap = new HashMap<>();
 		List<String> rowKeys = new ArrayList<>();
+		DataFormatter formatter = new DataFormatter();
 
 		int rowCounter = 0;
 		for (Row row: sheet){
@@ -59,7 +61,7 @@ public class DataLoader {
 					if(cell==null || cell.getCellType()==Cell.CELL_TYPE_BLANK)
 						rowVals.add("");
 					else
-						rowVals.add(cell.getStringCellValue());
+						rowVals.add(formatter.formatCellValue(cell));
 				}
 				for(int i=0; i < rowKeys.size(); i++){
 					rowMap.put(rowKeys.get(i), rowVals.get(i));
