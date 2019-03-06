@@ -120,7 +120,7 @@ public abstract class Core<T> {
 	}
 
 	public static WebDriver getWebDriver() {
-		if (driver != null) {
+        if (driver != null && !driver.toString().contains("(null)")) {
 			return driver;
 		} else {
 			return startWebDriver();
