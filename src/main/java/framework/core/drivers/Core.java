@@ -1,3 +1,15 @@
+/*===============================================================================================================================
+        CLASS Name:    Core
+        CREATED BY:    Raghavendran Ramasubramanian (Raghavendran.R1@cognizant.com)
+        DATE CREATED:  Nov 2018
+        DESCRIPTION:   Core class to handle initialize and other important methods
+        PARAMETERS:
+        RETURNS:
+        COMMENTS:
+        Modification Log:
+        Date                             Initials                                                Modification
+-------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
 package framework.core.drivers;
 
 import com.sun.jna.platform.win32.User32;
@@ -21,9 +33,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-//import mmarquee.automation.controls.AutomationWindow;
-
-//TODO: BB - need to remove dependency on WebDriver to allow generic methods handled by "Driver"
 public abstract class Core<T> {
 
 	private static Logger logger = LogManager.getLogger(Core.class);
@@ -120,7 +129,7 @@ public abstract class Core<T> {
 	}
 
 	public static WebDriver getWebDriver() {
-        if (driver != null && !driver.toString().contains("(null)")) {
+		if (driver != null && !driver.toString().contains("(null)")) {
 			return driver;
 		} else {
 			return startWebDriver();
@@ -130,7 +139,6 @@ public abstract class Core<T> {
 	public static synchronized WebDriver startWebDriver() {
 		DriverFactory factory = new DriverFactory(getDriverConfig());
 		driver = factory.createDriver();
-		//driver.manage().window().setSize(new org.openqa.selenium.Dimension(1024, 768));
 		driver.manage().window().maximize();
 		String window = driver.getWindowHandle();
 		((JavascriptExecutor) driver).executeScript("alert('Test')");
@@ -188,11 +196,11 @@ public abstract class Core<T> {
 	private static void embedScreenshotInReport(BufferedImage inputImage) {
 		try {
 			int scaledWidth = ((testConfig.getScreenshotWidth() != 0) ?
-				testConfig.getScreenshotWidth() :
-				inputImage.getWidth());
+					testConfig.getScreenshotWidth() :
+					inputImage.getWidth());
 			int scaledHeight = ((testConfig.getScreenshotHeight() != 0) ?
-				testConfig.getScreenshotHeight() :
-				inputImage.getHeight());
+					testConfig.getScreenshotHeight() :
+					inputImage.getHeight());
 			// scales the input image to the output image
 			BufferedImage outputImage = new BufferedImage(scaledWidth, scaledHeight, inputImage.getType());
 			Graphics2D g2d = outputImage.createGraphics();

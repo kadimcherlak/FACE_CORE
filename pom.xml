@@ -35,6 +35,38 @@
         <pluginManagement>
             <plugins>
                 <plugin>
+                    <groupId>com.github.wvengen</groupId>
+                    <artifactId>proguard-maven-plugin</artifactId>
+                    <version>2.0.6</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>net.sf.proguard</groupId>
+                            <artifactId>proguard-base</artifactId>
+                            <version>4.10</version>
+                        </dependency>
+                    </dependencies>
+                    <executions>
+                        <execution>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>proguard</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <proguardVersion>4.4</proguardVersion>
+                        <obfuscate>true</obfuscate>
+                        <options>
+                            <!-- Keep public classes non obfuscate mode-->
+                            <option>-keep public class * { public protected *; }</option>
+                        </options>
+                        <libs>
+                            <lib>C:/Program Files/Java/jre1.8.0_201/jre/lib/rt.jar</lib>
+                            <lib>C:/Program Files/Java/jre1.8.0_201/jre/lib/jce.jar</lib>
+                        </libs>
+                    </configuration>
+                </plugin>
+                <plugin>
                     <artifactId>maven-clean-plugin</artifactId>
                     <version>2.5</version>
                 </plugin>

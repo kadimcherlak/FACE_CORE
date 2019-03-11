@@ -1,3 +1,15 @@
+/*===============================================================================================================================
+        CLASS Name:    DriverFactory
+        CREATED BY:    Raghavendran Ramasubramanian (Raghavendran.R1@cognizant.com)
+        DATE CREATED:  Nov 2018
+        DESCRIPTION:   Driver Factory class to initialize WebDriver
+        PARAMETERS:
+        RETURNS:
+        COMMENTS:
+        Modification Log:
+        Date                             Initials                                                Modification
+-------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
 package framework.core.drivers.utils;
 
 import framework.core.drivers.Driver;
@@ -32,7 +44,7 @@ public class DriverFactory<T extends WebDriver> {
 	public WebDriver createDriver() {
 		DesiredCapabilities capabilities = new DesiredCapabilities();
 		WebDriver webDriver = null;
-        Driver driver = null;
+		Driver driver = null;
 		WebDriver driver1 = null;
 		// default to chrome
 		String browserName = "chrome";
@@ -50,8 +62,8 @@ public class DriverFactory<T extends WebDriver> {
 				chromeOptions.addArguments(driverConfig.getChrome().get("args"));
 				if (driverConfig.getChrome().containsKey("path")) {
 					if (driverConfig.getChrome().get("path") != null)
-                        System.setProperty("webdriver.chrome.driver", driverConfig.getChrome().get("path"));
-                    //chromeOptions.setBinary(driverConfig.getChrome().get("path"));
+						System.setProperty("webdriver.chrome.driver", driverConfig.getChrome().get("path"));
+					//chromeOptions.setBinary(driverConfig.getChrome().get("path"));
 				}
 				capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
 				webDriver = new ChromeDriver(chromeOptions);
@@ -78,12 +90,12 @@ public class DriverFactory<T extends WebDriver> {
 				for (Map.Entry<String, String> capability : driverConfig.getIe().entrySet()) {
 					capabilities.setCapability(capability.getKey(), capability.getValue());
 				}
-                if (driverConfig.getIe().containsKey("path")) {
-                    if (driverConfig.getFirefox().get("path") != null)
-                        System.setProperty("webdriver.ie.driver", driverConfig.getIe().get("path"));
-                }
-                capabilities.setCapability(InternetExplorerDriver.
-                        INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+				if (driverConfig.getIe().containsKey("path")) {
+					if (driverConfig.getFirefox().get("path") != null)
+						System.setProperty("webdriver.ie.driver", driverConfig.getIe().get("path"));
+				}
+				capabilities.setCapability(InternetExplorerDriver.
+						INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
 				webDriver = new InternetExplorerDriver();
 			}
 
@@ -93,27 +105,27 @@ public class DriverFactory<T extends WebDriver> {
 				for (Map.Entry<String, String> capability : driverConfig.getEdge().entrySet()) {
 					capabilities.setCapability(capability.getKey(), capability.getValue());
 				}
-                if (driverConfig.getEdge().containsKey("path")) {
-                    if (driverConfig.getFirefox().get("path") != null)
-                        System.setProperty("webdriver.edge.driver", driverConfig.getEdge().get("path"));
-                }
+				if (driverConfig.getEdge().containsKey("path")) {
+					if (driverConfig.getFirefox().get("path") != null)
+						System.setProperty("webdriver.edge.driver", driverConfig.getEdge().get("path"));
+				}
 				webDriver = new EdgeDriver();
 			}
 
 			if (browserName.equals(safari.getDriverName())) {
-                driver = Driver.getSafariDriver(browserName, capabilities);
+				driver = Driver.getSafariDriver(browserName, capabilities);
 				//WebDriverManager.().setup();
 				for (Map.Entry<String, String> capability : driverConfig.getSafari().entrySet()) {
 					capabilities.setCapability(capability.getKey(), capability.getValue());
 				}
-                if (driverConfig.getSafari().containsKey("path")) {
-                    if (driverConfig.getFirefox().get("path") != null)
-                        System.setProperty("webdriver.safari.driver", driverConfig.getEdge().get("path"));
-                }
+				if (driverConfig.getSafari().containsKey("path")) {
+					if (driverConfig.getFirefox().get("path") != null)
+						System.setProperty("webdriver.safari.driver", driverConfig.getEdge().get("path"));
+				}
 			}
 
 			if (browserName.equals(remote.getDriverName())) {
-                driver = Driver.getRemoteDriver(browserName, capabilities);
+				driver = Driver.getRemoteDriver(browserName, capabilities);
 				for (Map.Entry<String, String> capability : driverConfig.getRemote().entrySet()) {
 					capabilities.setCapability(capability.getKey(), capability.getValue());
 				}

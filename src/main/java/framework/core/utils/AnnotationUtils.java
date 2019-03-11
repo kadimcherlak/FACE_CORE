@@ -1,3 +1,15 @@
+/*===============================================================================================================================
+        CLASS Name:    AnnotationUtils
+        CREATED BY:    Raghavendran Ramasubramanian (Raghavendran.R1@cognizant.com)
+        DATE CREATED:  Nov 2018
+        DESCRIPTION:   Annotation utility class
+        PARAMETERS:
+        RETURNS:
+        COMMENTS:
+        Modification Log:
+        Date                             Initials                                                Modification
+-------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
 package framework.core.utils;
 
 import java.lang.annotation.Annotation;
@@ -7,22 +19,22 @@ import java.util.Map;
 
 public class AnnotationUtils {
 
-	public static final String ANNOTATION_DATA = "annotationData";
-	private static final String ANNOTATIONS = "annotations";
+    public static final String ANNOTATION_DATA = "annotationData";
+    private static final String ANNOTATIONS = "annotations";
 
-	public static void alterAnnotationOn(Class clazzToLookFor, Class<? extends Annotation> annotationToAlter, Annotation annotationValue) {
-		try {
-			Method method = Class.class.getDeclaredMethod(ANNOTATION_DATA, null);
-			method.setAccessible(true);
-			Object annotationData = method.invoke(clazzToLookFor);
-			Field annotations = annotationData.getClass().getDeclaredField(ANNOTATIONS);
-			annotations.setAccessible(true);
-			Map<Class<? extends Annotation>, Annotation> map =
-				(Map<Class<? extends Annotation>, Annotation>) annotations.get(annotationData);
-			map.put(annotationToAlter, annotationValue);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+    public static void alterAnnotationOn(Class clazzToLookFor, Class<? extends Annotation> annotationToAlter, Annotation annotationValue) {
+        try {
+            Method method = Class.class.getDeclaredMethod(ANNOTATION_DATA, null);
+            method.setAccessible(true);
+            Object annotationData = method.invoke(clazzToLookFor);
+            Field annotations = annotationData.getClass().getDeclaredField(ANNOTATIONS);
+            annotations.setAccessible(true);
+            Map<Class<? extends Annotation>, Annotation> map =
+                    (Map<Class<? extends Annotation>, Annotation>) annotations.get(annotationData);
+            map.put(annotationToAlter, annotationValue);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }

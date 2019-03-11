@@ -1,3 +1,15 @@
+/*===============================================================================================================================
+        CLASS Name:    CukeOptions
+        CREATED BY:    Raghavendran Ramasubramanian (Raghavendran.R1@cognizant.com)
+        DATE CREATED:  Nov 2018
+        DESCRIPTION:   Cuke Options class to enable CukeOptions models
+        PARAMETERS:
+        RETURNS:
+        COMMENTS:
+        Modification Log:
+        Date                             Initials                                                Modification
+-------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
 package framework.core.models;
 
 import cucumber.api.CucumberOptions;
@@ -7,108 +19,108 @@ import java.lang.annotation.Annotation;
 
 public class CukeOptions implements CucumberOptions {
 
-	private boolean dryRun;
-	private boolean strict;
-	private boolean monochrome;
-	private String[] features;
-	private String[] glue;
-	private String[] tags;
-	private String[] plugin;
-	private String[] name;
-	private String[] junit;
-	private SnippetType snippets;
+    private boolean dryRun;
+    private boolean strict;
+    private boolean monochrome;
+    private String[] features;
+    private String[] glue;
+    private String[] tags;
+    private String[] plugin;
+    private String[] name;
+    private String[] junit;
+    private SnippetType snippets;
 
-	@Override
-	public Class<? extends Annotation> annotationType() {
-		return CukeOptions.class;
-	}
+    @Override
+    public Class<? extends Annotation> annotationType() {
+        return CukeOptions.class;
+    }
 
-	public boolean dryRun() {
-		return dryRun;
-	}
+    public boolean dryRun() {
+        return dryRun;
+    }
 
-	public void setDryRun(boolean dryRun) {
-		this.dryRun = dryRun;
-	}
+    public void setDryRun(boolean dryRun) {
+        this.dryRun = dryRun;
+    }
 
-	public boolean monochrome() {
-		return monochrome;
-	}
+    public boolean monochrome() {
+        return monochrome;
+    }
 
-	public void setMonochrome(boolean monochrome) {
-		this.monochrome = monochrome;
-	}
+    public void setMonochrome(boolean monochrome) {
+        this.monochrome = monochrome;
+    }
 
-	public boolean strict() {
-		return strict;
-	}
+    public boolean strict() {
+        return strict;
+    }
 
-	public void setStrict(boolean strict) {
-		this.strict = strict;
-	}
+    public void setStrict(boolean strict) {
+        this.strict = strict;
+    }
 
-	@Override
-	public String[] features() {
-		return features;
-	}
+    @Override
+    public String[] features() {
+        return features;
+    }
 
-	public void setFeatures(String[] features) {
-		this.features = features;
-	}
+    public void setFeatures(String[] features) {
+        this.features = features;
+    }
 
-	@Override
-	public String[] glue() {
-		return glue;
-	}
+    @Override
+    public String[] glue() {
+        return glue;
+    }
 
-	public void setGlue(String[] glue) {
-		this.glue = glue;
-	}
+    public void setGlue(String[] glue) {
+        this.glue = glue;
+    }
 
-	@Override
-	public String[] tags() {
-		return tags;
-	}
+    @Override
+    public String[] tags() {
+        return tags;
+    }
 
-	public void setTags(String[] tags) {
-		this.tags = tags;
-	}
+    public void setTags(String[] tags) {
+        this.tags = tags;
+    }
 
-	@Override
-	public String[] plugin() {
-		return plugin;
-	}
+    @Override
+    public String[] plugin() {
+        return plugin;
+    }
 
-	public void setPlugin(String[] plugin) {
-		this.plugin = plugin;
-	}
+    public void setPlugin(String[] plugin) {
+        this.plugin = plugin;
+    }
 
-	@Override
-	public String[] name() {
-		return name;
-	}
+    @Override
+    public String[] name() {
+        return name;
+    }
 
-	public void setName(String[] name) {
-		this.name = name;
-	}
+    public void setName(String[] name) {
+        this.name = name;
+    }
 
-	@Override
-	public SnippetType snippets() {
-		return snippets;
-	}
+    @Override
+    public SnippetType snippets() {
+        return snippets;
+    }
 
-	public void setSnippets(SnippetType snippets) {
-		this.snippets = snippets;
-	}
+    public void setSnippets(SnippetType snippets) {
+        this.snippets = snippets;
+    }
 
-	@Override
-	public String[] junit() {
-		return junit;
-	}
+    @Override
+    public String[] junit() {
+        return junit;
+    }
 
-	public void setJunit(String[] junit) {
-		this.junit = junit;
-	}
+    public void setJunit(String[] junit) {
+        this.junit = junit;
+    }
 
 }
 

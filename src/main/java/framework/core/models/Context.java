@@ -1,3 +1,15 @@
+/*===============================================================================================================================
+        CLASS Name:    Context
+        CREATED BY:    Raghavendran Ramasubramanian (Raghavendran.R1@cognizant.com)
+        DATE CREATED:  Nov 2018
+        DESCRIPTION:   Context Abstract class to enable Context models
+        PARAMETERS:
+        RETURNS:
+        COMMENTS:
+        Modification Log:
+        Date                             Initials                                                Modification
+-------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
 package framework.core.models;
 
 import cucumber.api.Scenario;

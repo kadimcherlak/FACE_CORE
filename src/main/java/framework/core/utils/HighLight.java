@@ -1,3 +1,15 @@
+/*===============================================================================================================================
+        CLASS Name:    HighLight
+        CREATED BY:    Raghavendran Ramasubramanian (Raghavendran.R1@cognizant.com)
+        DATE CREATED:  Nov 2018
+        DESCRIPTION:   HighLight utility class to enable HighLight
+        PARAMETERS:
+        RETURNS:
+        COMMENTS:
+        Modification Log:
+        Date                             Initials                                                Modification
+-------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
 package framework.core.utils;
 
 import org.openqa.selenium.JavascriptExecutor;

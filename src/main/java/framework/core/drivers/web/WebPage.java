@@ -1,3 +1,15 @@
+/*===============================================================================================================================
+        CLASS Name:    WebPage
+        CREATED BY:    Raghavendran Ramasubramanian (Raghavendran.R1@cognizant.com)
+        DATE CREATED:  Nov 2018
+        DESCRIPTION:   Web Page for Web framework
+        PARAMETERS:
+        RETURNS:
+        COMMENTS:
+        Modification Log:
+        Date                             Initials                                                Modification
+-------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
 package framework.core.drivers.web;
 
 import framework.core.drivers.Page;
@@ -36,8 +48,8 @@ public class WebPage<T> extends Page {
 		ExpectedCondition<Boolean> pageLoadCondition = new ExpectedCondition<Boolean>() {
 			public Boolean apply(WebDriver driver) {
 				return ((JavascriptExecutor) driver)
-					.executeScript("return document.readyState")
-					.equals("complete");
+						.executeScript("return document.readyState")
+						.equals("complete");
 			}
 		};
 		WebDriverWait wait = new WebDriverWait(driver, normalTimeOut);
@@ -50,8 +62,8 @@ public class WebPage<T> extends Page {
 
 	public <T> T waitFor(ExpectedCondition<T> waitCondition) {
 		return new WebDriverWait(driver, normalTimeOut)
-			.ignoring(StaleElementReferenceException.class)
-			.until(waitCondition);
+				.ignoring(StaleElementReferenceException.class)
+				.until(waitCondition);
 	}
 
 	public void waitLongTime() {
@@ -59,7 +71,7 @@ public class WebPage<T> extends Page {
 			Thread.sleep(new Long(longTimeOut));
 		} catch (Exception e) {
 			logger.error("Exception:wait = problem encountered while attempting to sleep the thread - {}",
-				e.getMessage());
+					e.getMessage());
 			e.printStackTrace();
 		}
 	}
@@ -69,7 +81,7 @@ public class WebPage<T> extends Page {
 			Thread.sleep(new Long(normalTimeOut));
 		} catch (Exception e) {
 			logger.error("Exception:wait = problem encountered while attempting to sleep the thread - {}",
-				e.getMessage());
+					e.getMessage());
 			e.printStackTrace();
 		}
 	}
@@ -79,7 +91,7 @@ public class WebPage<T> extends Page {
 			Thread.sleep(new Long(shortTimeOut));
 		} catch (Exception e) {
 			logger.error("Exception:wait = problem encountered while attempting to sleep the thread - {}",
-				e.getMessage());
+					e.getMessage());
 			e.printStackTrace();
 		}
 	}
@@ -137,7 +149,7 @@ public class WebPage<T> extends Page {
 	}
 
 	public void selectElementFromDivOptions(WebElement divOptionElement, String selectText, boolean partialTextSearch)
-		throws Exception {
+			throws Exception {
 		// Enter the text
 		String findSearchText = "";
 		String[] wordsInText = selectText.split(" ", -1);
@@ -164,7 +176,7 @@ public class WebPage<T> extends Page {
 			int j = 0;
 			while (j < selectedOptionWebElement.size()) {
 				String textWithOutSpaceFromOptions = selectedOptionWebElement.get(j).getAttribute("innerHTML")
-					.replaceAll("&amp;", "&").replaceAll(" ", "");
+						.replaceAll("&amp;", "&").replaceAll(" ", "");
 				if (selectTextWithoutSpacefromTestData.equalsIgnoreCase(textWithOutSpaceFromOptions)) {
 					logger.debug("Match found");
 					divOptionElement.sendKeys(Keys.ENTER);
@@ -278,7 +290,7 @@ public class WebPage<T> extends Page {
 	}
 
 	public void selectValueFromDropDownWithContainsText(WebElement element, String text)
-		throws Exception {
+			throws Exception {
 		try {
 			isElementVisible(element);
 			Select dropDown = new Select(element);

@@ -1,3 +1,15 @@
+/*===============================================================================================================================
+        CLASS Name:    MapPageElementsHandler
+        CREATED BY:    Raghavendran Ramasubramanian (Raghavendran.R1@cognizant.com)
+        DATE CREATED:  Nov 2018
+        DESCRIPTION:   Map Page Elements Handler
+        PARAMETERS:
+        RETURNS:
+        COMMENTS:
+        Modification Log:
+        Date                             Initials                                                Modification
+-------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
 package framework.core.drivers.utils;
 
 import framework.core.annotations.GroupBy;
@@ -20,104 +32,104 @@ import java.util.Map;
 
 public class MapPageElementsHandler implements InvocationHandler {
 
-	private static final Logger logger = LogManager.getLogger(ListPageElementsHandler.class);
+    private static final Logger logger = LogManager.getLogger(ListPageElementsHandler.class);
 
-	private final Map<String, Object> webElements = new HashMap<String, Object>();
-	private final ElementLocator locator;
-	private final Field field;
-	private final String propertyName;
-	private final WebPage page;
-	private final Class<?> pageType;
-	private final boolean compositeKey;
-	private boolean refresh = true;
+    private final Map<String, Object> webElements = new HashMap<String, Object>();
+    private final ElementLocator locator;
+    private final Field field;
+    private final String propertyName;
+    private final WebPage page;
+    private final Class<?> pageType;
+    private final boolean compositeKey;
+    private boolean refresh = true;
 
-	public MapPageElementsHandler(
-		ElementLocator locator,
-		Field field,
-		WebPage page,
-		Class<?> pageType) {
-		this.locator = locator;
-		this.field = field;
-		this.page = page;
-		this.pageType = pageType;
+    public MapPageElementsHandler(
+            ElementLocator locator,
+            Field field,
+            WebPage page,
+            Class<?> pageType) {
+        this.locator = locator;
+        this.field = field;
+        this.page = page;
+        this.pageType = pageType;
 
-		GroupBy annotation = field.getAnnotation(GroupBy.class);
-		GroupBy groupBy = annotation;
-		if (groupBy == null) {
-			logger.error("Error:MapPageElementHandler = {} : {}",
-				field.getName(),
-				"groupBy is null. Cannot create a map without GroupBy annotation for field.");
-			throw new FrameworkException(
-				"Exception:MapPageElementHandler = "
-					+ field.getName()
-					+ ": groupBy is null. Cannot create a map without GroupBy annotation for field.");
-		}
-		propertyName = annotation.value();
-		compositeKey = annotation.compositeKey();
-	}
+        GroupBy annotation = field.getAnnotation(GroupBy.class);
+        GroupBy groupBy = annotation;
+        if (groupBy == null) {
+            logger.error("Error:MapPageElementHandler = {} : {}",
+                    field.getName(),
+                    "groupBy is null. Cannot create a map without GroupBy annotation for field.");
+            throw new FrameworkException(
+                    "Exception:MapPageElementHandler = "
+                            + field.getName()
+                            + ": groupBy is null. Cannot create a map without GroupBy annotation for field.");
+        }
+        propertyName = annotation.value();
+        compositeKey = annotation.compositeKey();
+    }
 
-	public Object invoke(Object proxy, Method method, Object[] args) {
-		try {
-			if (method.getDeclaringClass() == Map.class) {
-				if (refresh) {
-					List<WebElement> locatedElements = locator.findElements();
-					if (locatedElements.isEmpty()) {
-						logger.warn("Warning:No elements were found for the locator in the field {} : {}"
-							+ field.getName()
-							+ "Please try refresh if elements are expected or verify the locator is correct.");
-					}
-					createMap(locatedElements);
-					refresh = false;
-				}
-			}
-			return method.invoke(webElements, args);
-		} catch (Exception e) {
-			logger.error("Exception:invoke = Error while lookup of field {}", e.getMessage());
-			throw new NoSuchElementException(
-				"Exception:invoke = Error while locating the element in field "
-					+ field.getName(), e);
-		}
-	}
+    public Object invoke(Object proxy, Method method, Object[] args) {
+        try {
+            if (method.getDeclaringClass() == Map.class) {
+                if (refresh) {
+                    List<WebElement> locatedElements = locator.findElements();
+                    if (locatedElements.isEmpty()) {
+                        logger.warn("Warning:No elements were found for the locator in the field {} : {}"
+                                + field.getName()
+                                + "Please try refresh if elements are expected or verify the locator is correct.");
+                    }
+                    createMap(locatedElements);
+                    refresh = false;
+                }
+            }
+            return method.invoke(webElements, args);
+        } catch (Exception e) {
+            logger.error("Exception:invoke = Error while lookup of field {}", e.getMessage());
+            throw new NoSuchElementException(
+                    "Exception:invoke = Error while locating the element in field "
+                            + field.getName(), e);
+        }
+    }
 
-	protected void createMap(List<WebElement> locatedElements)
-		throws NoSuchMethodException,
-		IllegalAccessException,
-		InvocationTargetException {
+    protected void createMap(List<WebElement> locatedElements)
+            throws NoSuchMethodException,
+            IllegalAccessException,
+            InvocationTargetException {
 
-		int counter = 0;
-		for (WebElement element : locatedElements) {
-			ElementLocatorWrapper wrapper = new ElementLocatorWrapper(locatedElements, counter);
-			Object mapIt = ElementFactory.createInstanceOfType(field, wrapper, page, pageType);
-			String keyName = null;
-			if (!compositeKey) {
-				keyName = fromWebElement(element);
-			} else {
-				keyName = fromObjectGetter(mapIt);
-			}
-			webElements.put(keyName, mapIt);
-			counter++;
-		}
-	}
+        int counter = 0;
+        for (WebElement element : locatedElements) {
+            ElementLocatorWrapper wrapper = new ElementLocatorWrapper(locatedElements, counter);
+            Object mapIt = ElementFactory.createInstanceOfType(field, wrapper, page, pageType);
+            String keyName = null;
+            if (!compositeKey) {
+                keyName = fromWebElement(element);
+            } else {
+                keyName = fromObjectGetter(mapIt);
+            }
+            webElements.put(keyName, mapIt);
+            counter++;
+        }
+    }
 
-	private String fromWebElement(WebElement element)
-		throws NoSuchMethodException,
-		IllegalAccessException,
-		InvocationTargetException {
-		String keyName = element.getAttribute(propertyName);
-		if (keyName == null) {
-			keyName = fromObjectGetter(element);
-		}
-		return keyName;
-	}
+    private String fromWebElement(WebElement element)
+            throws NoSuchMethodException,
+            IllegalAccessException,
+            InvocationTargetException {
+        String keyName = element.getAttribute(propertyName);
+        if (keyName == null) {
+            keyName = fromObjectGetter(element);
+        }
+        return keyName;
+    }
 
-	private String fromObjectGetter(Object element)
-		throws NoSuchMethodException,
-		IllegalAccessException,
-		InvocationTargetException {
-		String apiLookup = new StringBuilder("get").append(
-			StringUtils.capitalize(propertyName)).toString();
-		Method getApi = element.getClass().getDeclaredMethod(apiLookup);
-		getApi.setAccessible(true);
-		return (String) getApi.invoke(element);
-	}
+    private String fromObjectGetter(Object element)
+            throws NoSuchMethodException,
+            IllegalAccessException,
+            InvocationTargetException {
+        String apiLookup = new StringBuilder("get").append(
+                StringUtils.capitalize(propertyName)).toString();
+        Method getApi = element.getClass().getDeclaredMethod(apiLookup);
+        getApi.setAccessible(true);
+        return (String) getApi.invoke(element);
+    }
 }

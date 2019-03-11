@@ -1,3 +1,15 @@
+/*===============================================================================================================================
+        CLASS Name:    Driver
+        CREATED BY:    Raghavendran Ramasubramanian (Raghavendran.R1@cognizant.com)
+        DATE CREATED:  Nov 2018
+        DESCRIPTION:   Driver to handle Driver initialize and other important driver methods
+        PARAMETERS:
+        RETURNS:
+        COMMENTS:
+        Modification Log:
+        Date                             Initials                                                Modification
+-------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
 package framework.core.drivers;
 
 import framework.core.drivers.web.SynchronizedIEDriver;
@@ -14,12 +26,6 @@ import java.util.List;
 
 public enum Driver {
 
-    /*chrome(DesiredCapabilities.chrome(), ChromeDriver.class, RemoteWebDriver.class),
-    firefox(DesiredCapabilities.firefox(), FirefoxDriver.class, RemoteWebDriver.class),
-    ie(DesiredCapabilities.internetExplorer(), SynchronizedIEDriver.class, RemoteWebDriver.class),
-    edge(DesiredCapabilities.edge(), EdgeDriver.class, RemoteWebDriver.class),
-    safari(DesiredCapabilities.safari(), SafariDriver.class, RemoteWebDriver.class),
-    remote(new DesiredCapabilities(), ChromeDriver.class, RemoteWebDriver.class);*/
     chrome(DesiredCapabilities.chrome(), ChromeDriver.class),
     firefox(DesiredCapabilities.firefox(), FirefoxDriver.class),
     ie(DesiredCapabilities.internetExplorer(), SynchronizedIEDriver.class),
@@ -27,39 +33,39 @@ public enum Driver {
     safari(DesiredCapabilities.safari(), SafariDriver.class),
     remote(new DesiredCapabilities(), RemoteWebDriver.class);
 
-	private final Class<? extends WebDriver> driverClass;
-	private final Class<? extends WebDriver> hubEnabledDriver;
-	private final String driverName;
-	private DesiredCapabilities capabilities;
+    private final Class<? extends WebDriver> driverClass;
+    private final Class<? extends WebDriver> hubEnabledDriver;
+    private final String driverName;
+    private DesiredCapabilities capabilities;
 
-	Driver(DesiredCapabilities capabilities, Class<? extends WebDriver> driverClass,
-		   Class<? extends WebDriver> hubEnabledDriver) {
-		this.driverName = name();
-		this.capabilities = capabilities;
-		this.driverClass = driverClass;
-		this.hubEnabledDriver = hubEnabledDriver;
+    Driver(DesiredCapabilities capabilities, Class<? extends WebDriver> driverClass,
+           Class<? extends WebDriver> hubEnabledDriver) {
+        this.driverName = name();
+        this.capabilities = capabilities;
+        this.driverClass = driverClass;
+        this.hubEnabledDriver = hubEnabledDriver;
 
-	}
+    }
 
-	Driver(DesiredCapabilities capabilities, Class<? extends WebDriver> driverClass) {
-		this(capabilities, driverClass, driverClass);
-	}
+    Driver(DesiredCapabilities capabilities, Class<? extends WebDriver> driverClass) {
+        this(capabilities, driverClass, driverClass);
+    }
 
-	Driver(DesiredCapabilities capabilities) {
-		this(capabilities, null);
-	}
+    Driver(DesiredCapabilities capabilities) {
+        this(capabilities, null);
+    }
 
-	public static Driver get(String browserName, DesiredCapabilities capabilities) {
-		Driver returnDriver = Driver.remote;
-		for (Driver driver : Driver.values()) {
-			if (driver.driverName.equals(browserName)) {
-				returnDriver = driver;
-				returnDriver.capabilities = capabilities;
-				break;
-			}
-		}
-		return returnDriver;
-	}
+    public static Driver get(String browserName, DesiredCapabilities capabilities) {
+        Driver returnDriver = Driver.remote;
+        for (Driver driver : Driver.values()) {
+            if (driver.driverName.equals(browserName)) {
+                returnDriver = driver;
+                returnDriver.capabilities = capabilities;
+                break;
+            }
+        }
+        return returnDriver;
+    }
 
     public static Driver getChromeDriver(String browserName, DesiredCapabilities capabilities) {
         Driver returnDriver = Driver.chrome;
@@ -73,13 +79,13 @@ public enum Driver {
         return returnDriver;
     }
 
-	public static List<String> supportedBrowsers() {
-		List<String> names = new ArrayList<String>();
-		for (Driver driver : Driver.values()) {
-			names.add(driver.name());
-		}
-		return names;
-	}
+    public static List<String> supportedBrowsers() {
+        List<String> names = new ArrayList<String>();
+        for (Driver driver : Driver.values()) {
+            names.add(driver.name());
+        }
+        return names;
+    }
 
     public static Driver getFirefoxDriver(String browserName, DesiredCapabilities capabilities) {
         Driver returnDriver = Driver.firefox;
@@ -141,15 +147,15 @@ public enum Driver {
         return returnDriver;
     }
 
-	public Class<? extends WebDriver> getDriverClass() {
-		return driverClass;
-	}
+    public Class<? extends WebDriver> getDriverClass() {
+        return driverClass;
+    }
 
-	public DesiredCapabilities getCapabilities() {
-		return new DesiredCapabilities(capabilities.asMap());
-	}
+    public DesiredCapabilities getCapabilities() {
+        return new DesiredCapabilities(capabilities.asMap());
+    }
 
-	public String getDriverName() {
-		return driverName;
-	}
+    public String getDriverName() {
+        return driverName;
+    }
 }

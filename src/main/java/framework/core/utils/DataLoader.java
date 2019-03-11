@@ -1,3 +1,15 @@
+/*===============================================================================================================================
+        CLASS Name:    DataLoader
+        CREATED BY:    Raghavendran Ramasubramanian (Raghavendran.R1@cognizant.com)
+        DATE CREATED:  Nov 2018
+        DESCRIPTION:   DataLoader utility class to load runtime data
+        PARAMETERS:
+        RETURNS:
+        COMMENTS:
+        Modification Log:
+        Date                             Initials                                                Modification
+-------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
 package framework.core.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
