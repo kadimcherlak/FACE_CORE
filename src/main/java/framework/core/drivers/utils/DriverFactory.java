@@ -53,7 +53,12 @@ public class DriverFactory<T extends WebDriver> {
 				capabilities.setCapability(capability.getKey(), capability.getValue());
 			}
 
-			browserName = capabilities.getBrowserName();
+			if (System.getProperty("browser").isEmpty()) {
+				browserName = capabilities.getBrowserName();
+			} else {
+				browserName = System.getProperty("browser");
+			}
+
 
 			if (browserName.equals(chrome.getDriverName())) {
 				WebDriverManager.chromedriver().setup();
